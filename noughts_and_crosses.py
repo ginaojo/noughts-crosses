@@ -30,15 +30,23 @@ def ComputersPositions(Board,Icon):
         Board[positions[comPos]] = Icon
     else:
         while comPos in PositionsUsed:
-            comPos = random.randint(0, 8)
-        Board[positions[comPos]] = Icon
-    PositionsUsed.append(comPos)    
+            comPos = random.randint(0, 8) # generate a position (index) that hasn't been used
+        Board[positions[comPos]] = Icon # make the free position with an X or O
+    PositionsUsed.append(comPos)  # add the index to a list of used positions  
 
 def UserMove(XO):
     print('What is your move? (top-, mid-, low- & L, M, R)')
     userPosistion = input()
-    theBoard[userPosistion] = XO
+    while userPosistion not in positions:
+        print('Please enter a valid position')
+        userPosistion = input()
     userPos = positions.index(userPosistion)
+    while userPos in PositionsUsed:
+        print('This posistion has been taken. Please choose a free position')
+        userPosistion = input()
+        userPos = positions.index(userPosistion)
+        
+    theBoard[userPosistion] = XO
     PositionsUsed.append(userPos)
     
 
@@ -115,8 +123,6 @@ def checkForWin(moves, markers, comIcon,theBoard):
         return checker
         
     
-
-
 while check1 != True: 
     ComputersPositions(theBoard, comIcon)
     printBoard(theBoard)
