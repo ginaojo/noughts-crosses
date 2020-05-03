@@ -129,9 +129,14 @@ while check1 != True:
     check = checkForWin(moves, markers, comIcon, theBoard)
     if check == True:
         break
+    if len(PositionsUsed) == 9:
+        print('Its a draw')
+        break
     UserMove(XorO)
     check1 = checkForWin(moves, markers, comIcon, theBoard)
-    
+    if len(PositionsUsed) == 9:
+        print('Its a draw')
+        break
     
 
 
