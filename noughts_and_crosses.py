@@ -34,16 +34,22 @@ def ComputersPositions(Board,Icon):
         Board[positions[comPos]] = Icon # make the free position with an X or O
     PositionsUsed.append(comPos)  # add the index to a list of used positions  
 
-def UserMove(XO):
-    print('What is your move? (top-, mid-, low- & L, M, R)')
-    userPosistion = input()
+def checkPosValid(userPosistion, positions):
     while userPosistion not in positions:
         print('Please enter a valid position')
         userPosistion = input()
+    return userPosistion
+
+
+def UserMove(XO):
+    print('What is your move? (top-, mid-, low- & L, M, R)')
+    userPosistion = input()
+    userPosistion = checkPosValid(userPosistion, positions)
     userPos = positions.index(userPosistion)
     while userPos in PositionsUsed:
         print('This posistion has been taken. Please choose a free position')
         userPosistion = input()
+        userPosistion = checkPosValid(userPosistion, positions)
         userPos = positions.index(userPosistion)
         
     theBoard[userPosistion] = XO
